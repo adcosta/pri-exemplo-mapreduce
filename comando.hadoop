@@ -1,0 +1,12 @@
+mkdir -p /workspace/input
+mkdir -p /workspace/output
+
+hdfs dfs -put colecao.txt /workspace/input/
+
+hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
+    -input /workspace/input/colecao.txt \
+    -output /workspace/output/indice_invertido \
+    -mapper "python3 mapper.py" \
+    -reducer "python3 reducer.py" \
+    -file mapper.py \
+    -file reducer.py
