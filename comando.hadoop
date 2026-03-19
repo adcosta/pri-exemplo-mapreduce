@@ -1,12 +1,23 @@
-mkdir -p /workspace/input
-mkdir -p /workspace/output
+#!/bin/bash
+# Executa o job de índice invertido em modo local (standalone)
+# Não requer HDFS nem YARN — o Hadoop usa o sistema de ficheiros local por defeito
 
-hdfs dfs -put colecao.txt /workspace/input/
+# Remove output anterior (o Hadoop falha se o directório já existir)
+rm -rf output/indice_invertido
 
+# Cria directório de input e copia a coleção
+mkdir -p input
+cp colecao.txt input/
+
+# Executa Hadoop Streaming em modo local
 hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
-    -input /workspace/input/colecao.txt \
-    -output /workspace/output/indice_invertido \
-    -mapper "python3 mapper.py" \
+    -input  input/colecao.txt \
+    -output output/indice_invertido \
+    -mapper  "python3 mapper.py" \
     -reducer "python3 reducer.py" \
     -file mapper.py \
     -file reducer.py
+
+echo ""
+echo "=== Índice Invertido ==="
+cat output/indice_invertido/part-00000
