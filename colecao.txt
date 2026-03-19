@@ -1,4 +1,4 @@
 Doc1	"MapReduce é um modelo eficiente para IR"
 Doc2	"IR usa índice invertido"
 Doc3	"Índice invertido melhora a busca em IR"
-Doc4	"Este exemplo usa MaoReduce para construir um indice invertido""
+Doc4	"Este exemplo usa MapReduce para construir um indice invertido"
