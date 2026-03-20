@@ -1,0 +1,7 @@
+<configuration>
+    <!-- Endereço do NameNode: define o sistema de ficheiros como HDFS -->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+</configuration>

@@ -1,0 +1,16 @@
+<configuration>
+    <!-- Fator de replicação 1: num único nó não faz sentido replicar -->
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+    <!-- Directórios locais onde o NameNode e DataNode guardam os seus dados -->
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>/tmp/hadoop/namenode</value>
+    </property>
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>/tmp/hadoop/datanode</value>
+    </property>
+</configuration>

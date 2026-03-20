@@ -1,0 +1,19 @@
+#!/bin/bash
+# Executa o job de índice invertido com Hadoop Streaming sobre HDFS + YARN
+# Requer que os serviços estejam a correr (ver start-hadoop.sh)
+
+# Remove output anterior no HDFS (o Hadoop falha se o directório já existir)
+hdfs dfs -rm -r -f /workspace/output/indice_invertido
+
+# Executa Hadoop Streaming
+hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
+    -input  /workspace/input/colecao.txt \
+    -output /workspace/output/indice_invertido \
+    -mapper  "python3 mapper.py" \
+    -reducer "python3 reducer.py" \
+    -file /workspace/mapper.py \
+    -file /workspace/reducer.py
+
+echo ""
+echo "=== Índice Invertido (lido do HDFS) ==="
+hdfs dfs -cat /workspace/output/indice_invertido/part-00000
