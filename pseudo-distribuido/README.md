@@ -183,8 +183,11 @@ A solução é dar um nome fixo ao container com `--hostname` e registá-lo no `
 ```bash
 docker run -it \
   -p 9870:9870 \
-  -p 8088:8088 \
+  -p 9868:9868 \
   -p 9864:9864 \
+  -p 8088:8088 \
+  -p 8042:8042 \
+  -p 19888:19888 \
   --hostname hadoop-local \
   mapreduce-pseudo
 ```
@@ -196,6 +199,12 @@ bash comando.hadoop
 ```
 
 As interfaces web ficam acessíveis no browser em:
-- **HDFS NameNode:** http://localhost:9870
-- **YARN ResourceManager:** http://localhost:8088
-- **DataNode:** http://hadoop-local:9864
+
+| Interface | URL | Daemon |
+|---|---|---|
+| HDFS NameNode | http://localhost:9870 | NameNode |
+| SecondaryNameNode | http://hadoop-local:9868 | SecondaryNameNode |
+| DataNode | http://hadoop-local:9864 | DataNode |
+| YARN ResourceManager | http://localhost:8088 | ResourceManager |
+| NodeManager | http://hadoop-local:8042 | NodeManager |
+| JobHistory Server | http://hadoop-local:19888 | MapReduce JobHistory |

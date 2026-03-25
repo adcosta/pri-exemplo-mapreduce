@@ -19,6 +19,9 @@ echo ">>> A criar estrutura de directórios no HDFS..."
 hdfs dfs -mkdir -p /user/root
 hdfs dfs -mkdir -p /workspace/input
 
+echo ">>> A iniciar JobHistory Server..."
+mapred --daemon start historyserver
+
 echo ">>> A copiar coleções para HDFS..."
 hdfs dfs -put /workspace/colecao.txt        /workspace/input/colecao.txt
 hdfs dfs -put /workspace/colecao_grande.txt /workspace/input/colecao_grande.txt
@@ -29,6 +32,7 @@ echo "  Hadoop pseudo-distribuído está a correr."
 echo ""
 echo "  Interface HDFS NameNode : http://localhost:9870"
 echo "  Interface YARN           : http://localhost:8088"
+echo "  JobHistory Server        : http://hadoop-local:19888"
 echo ""
 echo "  Para executar o job MapReduce:"
 echo "    bash /workspace/comando.hadoop"
