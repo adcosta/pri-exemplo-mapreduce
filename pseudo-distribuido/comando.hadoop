@@ -7,7 +7,7 @@ hdfs dfs -rm -r -f /workspace/output/indice_invertido
 
 # Executa Hadoop Streaming
 hadoop jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-*.jar \
-    -input  /workspace/input/colecao.txt \
+    -input  /workspace/input/colecao_grande.txt \
     -output /workspace/output/indice_invertido \
     -mapper  "python3 mapper.py" \
     -reducer "python3 reducer.py" \

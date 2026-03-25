@@ -19,8 +19,9 @@ echo ">>> A criar estrutura de directórios no HDFS..."
 hdfs dfs -mkdir -p /user/root
 hdfs dfs -mkdir -p /workspace/input
 
-echo ">>> A copiar coleção para HDFS..."
-hdfs dfs -put /workspace/colecao.txt /workspace/input/colecao.txt
+echo ">>> A copiar coleções para HDFS..."
+hdfs dfs -put /workspace/colecao.txt        /workspace/input/colecao.txt
+hdfs dfs -put /workspace/colecao_grande.txt /workspace/input/colecao_grande.txt
 
 echo ""
 echo "========================================================"

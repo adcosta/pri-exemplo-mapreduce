@@ -166,9 +166,27 @@ O Dockerfile deste directório configura automaticamente tudo o que foi descrito
 ```bash
 # A partir da pasta pri-exemplo-mapreduce/
 docker build -f pseudo-distribuido/Dockerfile -t mapreduce-pseudo .
+```
 
-# Iniciar o container (com portas expostas para as interfaces web)
-docker run -it -p 9870:9870 -p 8088:8088 mapreduce-pseudo
+### Iniciar o container com hostname fixo
+
+O Hadoop gera links internos usando o hostname do container. Sem um hostname fixo, o hostname é o ID do container (ex: `b0c5e563ebea`), o que torna os links das interfaces web inacessíveis a partir do browser.
+
+A solução é dar um nome fixo ao container com `--hostname` e registá-lo no `/etc/hosts` da máquina:
+
+**1. Adicionar ao `/etc/hosts` da tua máquina** (apenas uma vez):
+```
+127.0.0.1   hadoop-local
+```
+
+**2. Iniciar o container com esse hostname:**
+```bash
+docker run -it \
+  -p 9870:9870 \
+  -p 8088:8088 \
+  -p 9864:9864 \
+  --hostname hadoop-local \
+  mapreduce-pseudo
 ```
 
 Após o arranque, o container fica com uma shell activa em `/workspace`. Para executar o job:
@@ -180,3 +198,4 @@ bash comando.hadoop
 As interfaces web ficam acessíveis no browser em:
 - **HDFS NameNode:** http://localhost:9870
 - **YARN ResourceManager:** http://localhost:8088
+- **DataNode:** http://hadoop-local:9864

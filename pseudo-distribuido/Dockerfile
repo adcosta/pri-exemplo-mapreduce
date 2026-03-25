@@ -54,9 +54,10 @@ RUN hdfs namenode -format -force
 
 # Cria pasta de trabalho e copia ficheiros do exercício
 WORKDIR /workspace
-COPY colecao.txt  /workspace/
-COPY mapper.py    /workspace/
-COPY reducer.py   /workspace/
+COPY colecao.txt        /workspace/
+COPY colecao_grande.txt /workspace/
+COPY mapper.py          /workspace/
+COPY reducer.py         /workspace/
 COPY pseudo-distribuido/comando.hadoop /workspace/
 
 # Script de arranque
